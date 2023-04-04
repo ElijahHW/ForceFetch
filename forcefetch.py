@@ -5,6 +5,9 @@ from pytube import YouTube
 import time
 import subprocess
 import getpass
+import os
+import sys 
+
 
 #Configs
 username = getpass.getuser()
@@ -67,15 +70,22 @@ def completeDownload():
     progress_bar.pack_forget()
     link_input.pack_forget()
 
+def resource_path(relative_path):    
+    try:       
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 # System
-ct.set_appearance_mode("System")
+ct.set_appearance_mode("Dark")
 ct.set_default_color_theme("green")
 
 # Frame
 app = ct.CTk()
 app.geometry("720x480")
 app.title("ForceFetch")
-app.iconbitmap("fetcher.ico")
+app.iconbitmap(default=resource_path('fetcher.ico'))
 
 # UI stuff
 title = ct.CTkLabel(app, text="Insert a Youtube Link")
